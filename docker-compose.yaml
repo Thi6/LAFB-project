@@ -47,6 +47,15 @@ services:
       - server
       ports:
       - target: 9018
-        published: 9018  
+        published: 9018
+    num_gen:
+      build:
+        context: ./num_gen
+        dockerfile: Dockerfile
+      depends_on:
+      - server
+      ports:
+      - target: 9017
+        published: 9017  
 ...
 
