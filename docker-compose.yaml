@@ -39,6 +39,14 @@ services:
       ports:
       - target: 9000
         published: 9000
-  
+    text_gen:
+      build:
+        context: ./text_gen
+        dockerfile: Dockerfile
+      depends_on:
+      - server
+      ports:
+      - target: 9018
+        published: 9018  
 ...
 
