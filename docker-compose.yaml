@@ -1,0 +1,44 @@
+---
+version: '3.7'
+services:
+    db_connector:
+      build:
+        context: ./db_connector
+        dockerfile: Dockerfile
+      depends_on:
+      - mongo
+      ports:
+      - target: 5001
+        published: 5001
+    mongo:
+      image: mongo
+    prize_gen:
+      build:
+        context: ./prize_gen
+        dockerfile: Dockerfile
+      depends_on:
+      - db_connector
+      ports:
+      - target: 5002
+        published: 5002
+    server:
+      build:
+        context: ./server
+        dockerfile: Dockerfile
+      depends_on:
+      - prize_gen
+      ports:
+      - target: 8084
+        published: 8084
+    notification_server:
+      build:
+        context: ./notification_server
+        dockerfile: Dockerfile
+      depends_on:
+      - prize_gen
+      ports:
+      - target: 9000
+        published: 9000
+  
+...
+
