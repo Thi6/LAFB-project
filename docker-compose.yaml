@@ -1,6 +1,28 @@
 ---
 version: '3.7'
 services:
+    nginx:
+      container_name: nginx
+      image: nginx:latest
+      volumes:
+      - type: bind
+        source: ./nginx.conf
+        target: /etc/nginx/nginx.conf
+      ports:
+      - target: 80
+        published: 80
+        protocol: tcp
+      depends_on:
+        - client
+        - server
+    client:
+      build:
+        context: ./static_website
+        dockerfile: Dockerfile
+      ports:
+      - target: 8089
+        published: 8089
+        protocol: tcp
     db_connector:
       build:
         context: ./db_connector
