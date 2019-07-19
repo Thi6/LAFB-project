@@ -16,6 +16,7 @@ services:
         - client
         - server
     client:
+      image: thi6/client
       build:
         context: ./static_website
         dockerfile: Dockerfile
@@ -24,6 +25,7 @@ services:
         published: 8089
         protocol: tcp
     db_connector:
+      image: thi6/db_connector
       build:
         context: ./db_connector
         dockerfile: Dockerfile
@@ -35,6 +37,7 @@ services:
     mongo:
       image: mongo
     prize_gen:
+      image: thi6/prizegen:bigprize
       build:
         context: ./prize_gen
         dockerfile: Dockerfile
@@ -44,6 +47,7 @@ services:
       - target: 5002
         published: 5002
     server:
+      image: thi6/server
       build:
         context: ./server
         dockerfile: Dockerfile
@@ -53,6 +57,7 @@ services:
       - target: 8084
         published: 8084
     notification_server:
+      image: thi6/notification_server
       build:
         context: ./notification_server
         dockerfile: Dockerfile
@@ -62,6 +67,7 @@ services:
       - target: 9000
         published: 9000
     text_gen:
+      image: thi6/textgen:3
       build:
         context: ./text_gen
         dockerfile: Dockerfile
@@ -71,6 +77,7 @@ services:
       - target: 9018
         published: 9018
     num_gen:
+      image: thi6/numgen:6
       build:
         context: ./num_gen
         dockerfile: Dockerfile

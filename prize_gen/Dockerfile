@@ -1,6 +1,6 @@
 
 FROM node:10
-ARG VERSION=smallprize 
+ARG VERSION=bigprize 
 WORKDIR /usr/src/app
 
 COPY package*.json ./
