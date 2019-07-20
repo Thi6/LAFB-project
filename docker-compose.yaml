@@ -39,6 +39,8 @@ services:
     prize_gen:
       image: thi6/prizegen:bigprize
       build:
+        args:
+          VERSION: bigprize
         context: ./prize_gen
         dockerfile: Dockerfile
       depends_on:
@@ -69,6 +71,8 @@ services:
     text_gen:
       image: thi6/textgen:3
       build:
+        args:
+          VERSION: 3
         context: ./text_gen
         dockerfile: Dockerfile
       depends_on:
@@ -77,8 +81,10 @@ services:
       - target: 9018
         published: 9018
     num_gen:
-      image: thi6/numgen:8
+      image: thi6/numgen:6
       build:
+        args:
+          VERSION: 6
         context: ./num_gen
         dockerfile: Dockerfile
       depends_on:
