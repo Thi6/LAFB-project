@@ -12,14 +12,14 @@ The new architectural design for the updated application is shown below.
 ![New architecture](/documentation/new_architecture.png)
 Service (port): description
 * **Mongo (port 27017)**: the database
-* __Db_Connector (port 5001)__: communicates with the mongo database
-*	  **Prize_Generator (port 5002)**: When an account is created this service is responsible for generating a prize, sending HTTP GET request to the notification_server if someone wins a prize and HTTP POST request to the db_connector when an account is created
-*	  __Notification_Server (port 9000)__: a notification is sent here when a member has won a prize
-*	  **Server (port 8084)**: communicates to the three micro-services - Number_Generator, Text_Generator, Prize_Generator
-*	  **Number_Generator (port 9017)**:  microservice responsible for generating the numbers of an account number i.e. AH*2345678*
-*	  **Text_Generator (port 9018)**: microservice responsible for generating the letters of an account number i.e. _AH_12345678
-*	  **Static Website (port 8089)**: sends HTTP POST requests to the server when an account is created
-*	  **Nginx (port 80)**: this re-directs traffic to the appropriate location (i.e. Static_Website and Server)
+* **Db_Connector (port 5001)**: communicates with the mongo database
+*	**Prize_Generator (port 5002)**: When an account is created this service is responsible for generating a prize, sending HTTP GET request to the notification_server if someone wins a prize and HTTP POST request to the db_connector when an account is created
+*	**Notification_Server (port 9000)**: a notification is sent here when a member has won a prize
+*	**Server (port 8084)**: communicates to the three micro-services - Number_Generator, Text_Generator, Prize_Generator
+*	**Number_Generator (port 9017)**:  microservice responsible for generating the numbers of an account number i.e. AH*2345678*
+*	**Text_Generator (port 9018)**: microservice responsible for generating the letters of an account number i.e. _AH_12345678
+*	**Static Website (port 8089)**: sends HTTP POST requests to the server when an account is created
+*	**Nginx (port 80)**: this re-directs traffic to the appropriate location (i.e. Static_Website and Server)
 
 ## CI Pipeline
 
