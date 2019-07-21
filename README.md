@@ -49,7 +49,7 @@ az vm create --resource-group myResourceGroup --name manager --image UbuntuLTS -
 # Creates a worker node
 az vm create --resource-group myResourceGroup --name worker --image UbuntuLTS --generate-ssh-keys
 ```
-You can now SSH onto your machines (e.g. ssh username@51.145.54.189, where your username and ip address will be different)
+You can now SSH onto your machines (e.g. ```ssh username@51.145.54.189```, where your username and ip address will be different)
 
 ### Installing docker on Linux
 ```
@@ -124,6 +124,7 @@ docker stack services LAFB
 Under the ```REPLICAS``` column, you should see ```1/1``` for all the services. This may take a while as all the images need to be pulled from the registry.
 
 You can now see the application deployed by entering the public IP address of your manager VM into a web browser.
+![Landing_page](/documentation/landing_page.png)
 
 #### Swapping Microservice Implementations
 The images below can be swapped out during deployment:
