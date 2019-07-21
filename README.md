@@ -73,8 +73,8 @@ sudo curl -L "https://github.com/docker/compose/releases/download/1.23.2/docker-
 
 sudo chmod +x /usr/local/bin/docker-compose
 ```
-### Docker Swarm
-#### Deploying Application with Docker Swarm
+### Deploying Application with Docker Swarm
+#### Set-up
 
 Before we you get started you need to download the LAFB project into your manager VM , which can be accessed from the public GitHub repository https://github.com/Thi6/LAFB-project.git
 ```
@@ -98,8 +98,8 @@ To allow a worker node to join the swarm, on the worker VM run a command similar
 docker swarm join --token [TOKEN] [IP_ADDRESS]
 ```
 
- 
-* As we will now be managing the Swarm, make sure you are working on the manager VM.
+#### Build images
+As we will now be managing the Swarm, make sure you are working on the manager VM.
 In order to deploy this project in swarm mode, all the images needs to be created.
 
 ```
@@ -107,7 +107,8 @@ cd ~/LAFB-project
 docker-compose build
 ```
 
-* The stack can now be deployed, the following command creates a stack of services based on the services described in docker-compose.yaml file
+#### Deploy swarm stack
+The stack can now be deployed, the following command creates a stack of services based on the services described in docker-compose.yaml file
 ```
 docker stack deploy --compose-file docker-compose.yaml LAFB
 ```
