@@ -13,13 +13,13 @@ The new architectural design for the updated application is shown below.
 Service (port): description
 * **Mongo (port 27017)**: the database
 * **Db_Connector (port 5001)**: communicates with the mongo database
-*	**Prize_Generator (port 5002)**: When an account is created this service is responsible for generating a prize, sending HTTP GET request to the notification_server if someone wins a prize and HTTP POST request to the db_connector when an account is created
-*	**Notification_Server (port 9000)**: a notification is sent here when a member has won a prize
-*	**Server (port 8084)**: communicates to the three micro-services - Number_Generator, Text_Generator, Prize_Generator
-*	**Number_Generator (port 9017)**:  microservice responsible for generating the numbers of an account number i.e. AH*2345678*
-*	**Text_Generator (port 9018)**: microservice responsible for generating the letters of an account number i.e. _AH_12345678
-*	**Static Website (port 8089)**: sends HTTP POST requests to the server when an account is created
-*	**Nginx (port 80)**: this re-directs traffic to the appropriate location (i.e. Static_Website and Server)
+* **Prize_Generator (port 5002)**: When an account is created this service is responsible for generating a prize, sending HTTP GET request to the notification_server if someone wins a prize and HTTP POST request to the db_connector when an account is created
+* **Notification_Server (port 9000)**: a notification is sent here when a member has won a prize
+* **Server (port 8084)**: communicates to the three micro-services - Number_Generator, Text_Generator, Prize_Generator
+* **Number_Generator (port 9017)**:  microservice responsible for generating the numbers of an account number i.e. AH*2345678*
+* **Text_Generator (port 9018)**: microservice responsible for generating the letters of an account number i.e. *AH*12345678
+* **Static Website (port 8089)**: sends HTTP POST requests to the server when an account is created
+* **Nginx (port 80)**: this re-directs traffic to the appropriate location (i.e. Static_Website and Server)
 
 ## CI Pipeline
 
@@ -49,7 +49,7 @@ az vm create --resource-group myResourceGroup --name manager --image UbuntuLTS -
 # Creates a worker node
 az vm create --resource-group myResourceGroup --name worker --image UbuntuLTS --generate-ssh-keys
 ```
-You can now SSH onto you
+You can now SSH onto your machines (e.g. ssh username@51.145.54.189, where your username and ip address will be different)
 
 ### Installing docker on Linux
 ```
@@ -58,13 +58,14 @@ sudo apt install docker.io -y
 
 sudo usermod -aG docker $(whoami)
 
+# You will need to restart your cloud shell
+
 sudo systemctl start docker
 sudo systemctl enable docker
 ```
-You will need to restart your cloud shell.
 
 ### Installing docker-compose on Linux
-Next install docker-compose on your manager VM
+Next install docker-compose on your manager VM.
 ```
 sudo curl -L "https://github.com/docker/compose/releases/download/1.23.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
 
@@ -95,7 +96,8 @@ To allow a worker node to join the swarm, on the worker VM run a command similar
 docker swarm join --token [TOKEN] [IP_ADDRESS]
 ```
 
-As we will now be managing the Swarm, make sure you are working on the manager VM.
+ 
+* As we will now be managing the Swarm, make sure you are working on the manager VM.
 In order to deploy this project in swarm mode, all the images needs to be created.
 
 ```
@@ -103,14 +105,14 @@ cd ~/LAFB-project
 docker-compose build
 ```
 
-In order to distribute the images across the swarm, you need to push the generated images to the registry (for this project it is docker hub)
+* In order to distribute the images across the swarm, you need to push the generated images to the registry (for this project it is docker hub)
 
 Push the generated image to the registry
 ```
 docker-compose push
 ```
 
-The stack can now be deployed, the following command creates a stack of services based on the services described in docker-compose.yaml file
+* The stack can now be deployed, the following command creates a stack of services based on the services described in docker-compose.yaml file
 ```
 docker stack deploy --compose-file docker-compose.yaml LAFB
 ```
