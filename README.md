@@ -144,7 +144,7 @@ During deployment, you can swap out any of the above implementations by using th
 docker service update --image [image_name:image_tag] [service_name]
 ```
 For example:
-docker service update --image thi6/textgen:3 LAFB_text_gen
+```docker service update --image thi6/textgen:3 LAFB_text_gen```
 
 Note: 
 You can obtain the list of service names by using this command:
