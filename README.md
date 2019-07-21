@@ -49,7 +49,9 @@ az vm create --resource-group myResourceGroup --name manager --image UbuntuLTS -
 # Creates a worker node
 az vm create --resource-group myResourceGroup --name worker --image UbuntuLTS --generate-ssh-keys
 ```
-You can now SSH onto your machines (e.g. ```ssh username@51.145.54.189```, where your username and ip address will be different)
+You can now SSH onto your machines (e.g. ```ssh username@51.145.54.189```, where your username and ip address will be different) and install docker on both
+
+Note: You can navigate to your VM in the portal where you will be able to locate your IP address.
 
 ### Installing docker on Linux
 ```
@@ -58,7 +60,7 @@ sudo apt install docker.io -y
 
 sudo usermod -aG docker $(whoami)
 
-# You will need to restart your cloud shell
+# You will need to restart your cloud shell and SSH into your machine.
 
 sudo systemctl start docker
 sudo systemctl enable docker
@@ -74,7 +76,7 @@ sudo chmod +x /usr/local/bin/docker-compose
 ### Docker Swarm
 #### Deploying Application with Docker Swarm
 
-Before we can get started we need to download the LAFB project, which can be accessed from the public GitHub repository https://github.com/Thi6/LAFB-project.git
+Before we you get started you need to download the LAFB project into your manager VM , which can be accessed from the public GitHub repository https://github.com/Thi6/LAFB-project.git
 ```
 cd ~
 git clone https://github.com/Thi6/LAFB-project.git
@@ -105,13 +107,6 @@ cd ~/LAFB-project
 docker-compose build
 ```
 
-* In order to distribute the images across the swarm, you need to push the generated images to the registry (for this project it is docker hub)
-
-Push the generated image to the registry
-```
-docker-compose push
-```
-
 * The stack can now be deployed, the following command creates a stack of services based on the services described in docker-compose.yaml file
 ```
 docker stack deploy --compose-file docker-compose.yaml LAFB
@@ -124,7 +119,9 @@ docker stack services LAFB
 Under the ```REPLICAS``` column, you should see ```1/1``` for all the services. This may take a while as all the images need to be pulled from the registry.
 
 You can now see the application deployed by entering the public IP address of your manager VM into a web browser.
-![Landing_page](/documentation/landing_page.png)
+![Landing_page](/documentation/landing_page.PNG)
+
+Note: You may need to expose the port of your Nginx container (port 80) in your portal. First find the manager VM in the portal and locate the networking section and you can add inbound ports this way. 
 
 #### Swapping Microservice Implementations
 The images below can be swapped out during deployment:
