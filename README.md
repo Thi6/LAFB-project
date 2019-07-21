@@ -60,7 +60,7 @@ sudo apt install docker.io -y
 
 sudo usermod -aG docker $(whoami)
 
-# You will need to restart your cloud shell ans SSH into your machine.
+# You will need to restart your cloud shell and SSH into your machine.
 
 sudo systemctl start docker
 sudo systemctl enable docker
@@ -119,7 +119,7 @@ docker stack services LAFB
 Under the ```REPLICAS``` column, you should see ```1/1``` for all the services. This may take a while as all the images need to be pulled from the registry.
 
 You can now see the application deployed by entering the public IP address of your manager VM into a web browser.
-![Landing_page](/documentation/landing_page.png)
+![Landing_page](/documentation/landing_page.PNG)
 
 Note: You may need to expose the port of your Nginx container (port 80) in your portal. First find the manager VM in the portal and locate the networking section and you can add inbound ports this way. 
 
