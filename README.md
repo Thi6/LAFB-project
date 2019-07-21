@@ -3,7 +3,7 @@
 ## Architecture
 ### Original Architecture
 Below is the architectural design for the LAFB application in its original state.
-![Original architecture](/documentation/original_architecture.jpg) 
+![Original architecture](/documentation/original_architecture.png) 
 
 ### New Architecture
 The new architectural design for the updated application is shown below.
@@ -19,6 +19,6 @@ Service (port): description
 *	Static Website (port 8089): sends HTTP POST requests to the server when an account is created
 *	Nginx (port 80): this re-directs traffic to the appropriate location (i.e. Static_Website and Server)
 
-##CI Pipeline
+## CI Pipeline
 ![Pipeline image](/documentation/pipeline_image.png)
 Above is the CI pipeline, when a user makes a change to the source code and pushes it to a global repository in Github, a webhook will detect this change and trigger a Jenkins job which will rebuild the images and push them to Dockerhub.  The images of each deployment are now updated in the Swarm enabling seamless changes to the application without disruption to the service provided. (For example, the value of one of the rewards can be changed, and when it is pushed the implementation will be reflected on the application.)
