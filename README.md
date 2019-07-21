@@ -70,8 +70,8 @@ sudo curl -L "https://github.com/docker/compose/releases/download/1.23.2/docker-
 
 sudo chmod +x /usr/local/bin/docker-compose
 ```
-
-### Deploying Application with Docker Swarm
+### Docker Swarm
+#### Deploying Application with Docker Swarm
 
 Before we can get started we need to download the LAFB project, which can be accessed from the public GitHub repository https://github.com/Thi6/LAFB-project.git
 ```
@@ -122,3 +122,32 @@ docker stack services LAFB
 Under the ```REPLICAS``` column, you should see ```1/1``` for all the services. This may take a while as all the images need to be pulled from the registry.
 
 You can now see the application deployed by entering the public IP address of your manager VM into a web browser.
+
+#### Swapping Microservice Implementations
+The images below can be swapped out during deployment:
+* text generation service
+	- thi6/textgen:2 (default)
+		- randomly generates a string of 2 uppercase characters for a user's account number
+	- thi6/textgen:3
+		- randomly generates a string of 3 lowercase characters for a user's account number
+* number generation service
+	- thi6/numgen:6 (default)
+		- randomly generates a 6 digit number for a user's account number
+	- thi6/numgen:8
+		- randomly generates a 8 digit number for a user's account number
+* prize generation service
+	- thi6/prizegen:bigprize (default)
+	- thi6/prizegen:smallprize
+
+During deployment, you can swap out any of the above implementations by using the following command:
+```
+docker service update --image [image_name:image_tag] [service_name]
+```
+For example:
+docker service update --image thi6/textgen:3 LAFB_text_gen
+
+Note: 
+You can obtain the list of service names by using this command:
+```
+docker service list
+```
