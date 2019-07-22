@@ -81,10 +81,10 @@ services:
       - target: 9018
         published: 9018
     num_gen:
-      image: thi6/numgen:6
+      image: thi6/numgen:8
       build:
         args:
-          VERSION: 6
+          VERSION: 8
         context: ./num_gen
         dockerfile: Dockerfile
       depends_on:
