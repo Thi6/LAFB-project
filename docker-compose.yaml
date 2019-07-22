@@ -69,10 +69,10 @@ services:
       - target: 9000
         published: 9000
     text_gen:
-      image: thi6/textgen:3
+      image: thi6/textgen:2
       build:
         args:
-          VERSION: 3
+          VERSION: 2
         context: ./text_gen
         dockerfile: Dockerfile
       depends_on:
