@@ -29,6 +29,7 @@ Above is the CI pipeline, when a user makes a change to the source code and push
 ## Set-up
 ### Prerequisites:
 * Microsoft Azure account
+* Docker hub account
 
 1. Log into your Azure account
 2. Navigate to the portal and open a new cloud shell
@@ -105,6 +106,16 @@ In order to deploy this project in swarm mode, all the images needs to be create
 ```
 cd ~/LAFB-project
 docker-compose build
+```
+To distribute the images across the swarm, you need to push the generated images to the registry.
+First you need to login into docker hub in your manager VM.
+```
+docker login
+# you will then be prompted to enter you docker hub username and password
+```
+Now you can push the generated images to your registry
+```
+docker-compose push
 ```
 
 #### Deploy swarm stack
